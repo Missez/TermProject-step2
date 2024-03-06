@@ -17,8 +17,7 @@ const User = ({ name, location, email, picture, login , dob ,gender}) => {
     };
     const handleInsertData = async () => {
         try {
-            // Send a request to your server endpoint
-            console.log({
+            var data = JSON.stringify({
                 name_title: name.title,
                 name_first: name.first,
                 name_last: name.last,
@@ -31,23 +30,18 @@ const User = ({ name, location, email, picture, login , dob ,gender}) => {
                 picture_large: picture.large,
                 picture_medium: picture.medium,
                 picture_thumbnail: picture.thumbnail
-            });
-            const response = await axios.post('http://localhost:3000/insertData',{
-                name_title: name.title,
-                name_first: name.first,
-                name_last: name.last,
-                country: location.country,
-                email: email,
-                gender: gender, 
-                dob: dob.age, 
-                login_username: login.username,
-                login_password: login.password,
-                picture_large: picture.large,
-                picture_medium: picture.medium,
-                picture_thumbnail: picture.thumbnail
-            });
-
-            console.log(response.data);
+            })
+            console.log(data);
+            const response = await axios.post('http://api-user66001.se-rmutl.net/api/adduser/add',{
+                headers: {
+                    // Overwrite Axios's automatically set Content-Type
+                    'Content-Type': 'application/json'
+                  }
+                });
+              if(response.status === 200){
+                  alert(name.title +" "+name.first +" "+name.last+" "+response.data);
+              }
+            console.log(response);
         } catch (error) {
             console.error('Error inserting data:', error);
         }
