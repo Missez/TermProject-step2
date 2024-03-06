@@ -32,7 +32,7 @@ const User = ({ name, location, email, picture, login , dob ,gender}) => {
                 picture_thumbnail: picture.thumbnail
             })
             console.log(data);
-            const response = await axios.post('http://api-user66001.se-rmutl.net/api/adduser/add',{
+            const response = await axios.post('http://api-user66001.se-rmutl.net/api/adduser/add',data,{
                 headers: {
                     // Overwrite Axios's automatically set Content-Type
                     'Content-Type': 'application/json'
